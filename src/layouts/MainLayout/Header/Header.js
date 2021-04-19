@@ -62,7 +62,7 @@ export const Header = () => {
                     </Rate>
                     <List>
                         <Item>
-                            <a href="/BnbAirClubAudit.pdf" target="_blank">
+                            <a href="#" target="_blank">
                                 Audit
                             </a>
                         </Item>
