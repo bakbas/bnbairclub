@@ -222,8 +222,19 @@ export const HomePage = () => {
                                 </div>
                             </div>
                             <div className="deposit-range">
-                                <div style={{ width: `${deposit.percents}%` }}>
-                                    {deposit.percents}%
+                                <div
+                                    style={{
+                                        width: `${
+                                            deposit.percents <= 100
+                                                ? deposit.percents
+                                                : 100
+                                        }%`
+                                    }}
+                                >
+                                    {deposit.percents <= 100
+                                        ? deposit.percents
+                                        : 100}
+                                    %
                                 </div>
                             </div>
                         </div>
