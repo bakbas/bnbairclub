@@ -1,13 +1,12 @@
 pragma solidity 0.5.8;
 
-contract Contract {
+contract BnbAirClub {
     using SafeMath for uint256;
 
     uint256 public constant INVEST_MIN_AMOUNT = 0.01 ether;
-    uint256[] public REFERRAL_PERCENTS = [50, 20, 10];
-    uint256 public constant PROJECT_FEE = 80;
-    uint256 public constant DEVELOPER_FEE = 40;
-    uint256 public constant PERCENT_STEP = 5;
+    uint256[] public REFERRAL_PERCENTS = [50, 30, 20, 10, 5];
+    uint256 public constant PROJECT_FEE = 125;
+    uint256 public constant PERCENT_STEP = 1;
     uint256 public constant PERCENTS_DIVIDER = 1000;
     uint256 public constant TIME_STEP = 1 days;
 
@@ -34,7 +33,7 @@ contract Contract {
         Deposit[] deposits;
         uint256 checkpoint;
         address referrer;
-        uint256[3] levels;
+        uint256[5] levels;
         uint256 bonus;
         uint256 totalBonus;
     }
@@ -43,7 +42,6 @@ contract Contract {
 
     uint256 public startUNIX;
     address payable private commissionWallet;
-    address payable private developerWallet;
 
     event Newbie(address user);
     event NewDeposit(
@@ -63,18 +61,17 @@ contract Contract {
         uint256 amount
     );
 
-    constructor(address payable wallet, address payable _developer) public {
+    constructor(address payable wallet) public {
         require(!isContract(wallet));
         commissionWallet = wallet;
-        developerWallet = _developer;
         startUNIX = block.timestamp;
 
-        plans.push(Plan(12, 100));
-        plans.push(Plan(16, 80));
-        plans.push(Plan(20, 70));
-        plans.push(Plan(12, 100));
-        plans.push(Plan(16, 80));
-        plans.push(Plan(20, 70));
+        plans.push(Plan(7, 228));
+        plans.push(Plan(9, 211));
+        plans.push(Plan(12, 191));
+        plans.push(Plan(7, 228));
+        plans.push(Plan(9, 211));
+        plans.push(Plan(12, 191));
     }
 
     function invest(address referrer, uint8 plan) public payable {
@@ -83,9 +80,6 @@ contract Contract {
 
         uint256 fee = msg.value.mul(PROJECT_FEE).div(PERCENTS_DIVIDER);
         commissionWallet.transfer(fee);
-        uint256 developerFee =
-            msg.value.mul(DEVELOPER_FEE).div(PERCENTS_DIVIDER);
-        developerWallet.transfer(developerFee);
 
         User storage user = users[msg.sender];
 
@@ -95,7 +89,7 @@ contract Contract {
             }
 
             address upline = user.referrer;
-            for (uint256 i = 0; i < 3; i++) {
+            for (uint256 i = 0; i < 5; i++) {
                 if (upline != address(0)) {
                     users[upline].levels[i] = users[upline].levels[i].add(1);
                     upline = users[upline].referrer;
@@ -105,7 +99,7 @@ contract Contract {
 
         if (user.referrer != address(0)) {
             address upline = user.referrer;
-            for (uint256 i = 0; i < 3; i++) {
+            for (uint256 i = 0; i < 5; i++) {
                 if (upline != address(0)) {
                     uint256 amount =
                         msg.value.mul(REFERRAL_PERCENTS[i]).div(
