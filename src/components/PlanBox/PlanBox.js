@@ -28,9 +28,14 @@ export const PlanBox = ({
     const [amount, setAmount] = useState();
 
     function onChange(e) {
+        let complationDays = "...";
         setAmount(e.target.value);
-        const value = parseFloat(e.target.value);
-        const complationDays = (value * profit).toFixed(1);
+
+        if (e.target.value) {
+            const value = parseFloat(e.target.value);
+            complationDays = (value * profit).toFixed(1);
+        }
+
         inputOnChange({ complationDays, index });
     }
 

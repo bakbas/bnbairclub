@@ -1,5 +1,5 @@
 import { useContext, useCallback, useEffect } from "react";
-import { CONTRACT_ADDRESS, ABI, GAS_PRICE } from "UTILS";
+import { CONTRACT_ADDRESS, ABI } from "UTILS";
 import { appContext } from "CONTEXT/AppContext";
 
 export const useBNB = () => {
@@ -28,8 +28,7 @@ export const useBNB = () => {
             if (contract && state.wallet && amount) {
                 contract.methods.invest(ref, index).send({
                     value: amount * 1e18,
-                    from: state.wallet,
-                    gasPrice: GAS_PRICE
+                    from: state.wallet
                 });
             }
         },
@@ -40,8 +39,7 @@ export const useBNB = () => {
         const contract = await getContract();
         if (contract && state.wallet) {
             contract.methods.withdraw().send({
-                from: state.wallet,
-                gasPrice: GAS_PRICE
+                from: state.wallet
             });
         }
     }, [state.balance.availableWithdrawal, state.wallet]);

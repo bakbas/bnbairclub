@@ -4,7 +4,7 @@ contract BnbAirClub {
     using SafeMath for uint256;
 
     uint256 public constant INVEST_MIN_AMOUNT = 0.01 ether;
-    uint256[] public REFERRAL_PERCENTS = [50, 30, 20, 10, 5];
+    uint256[] public REFERRAL_PERCENTS = [40, 20, 10, 5];
     uint256 public constant PROJECT_FEE = 125;
     uint256 public constant PERCENT_STEP = 1;
     uint256 public constant PERCENTS_DIVIDER = 1000;
@@ -33,7 +33,7 @@ contract BnbAirClub {
         Deposit[] deposits;
         uint256 checkpoint;
         address referrer;
-        uint256[5] levels;
+        uint256[4] levels;
         uint256 bonus;
         uint256 totalBonus;
     }
@@ -89,7 +89,7 @@ contract BnbAirClub {
             }
 
             address upline = user.referrer;
-            for (uint256 i = 0; i < 5; i++) {
+            for (uint256 i = 0; i < 4; i++) {
                 if (upline != address(0)) {
                     users[upline].levels[i] = users[upline].levels[i].add(1);
                     upline = users[upline].referrer;
@@ -99,7 +99,7 @@ contract BnbAirClub {
 
         if (user.referrer != address(0)) {
             address upline = user.referrer;
-            for (uint256 i = 0; i < 5; i++) {
+            for (uint256 i = 0; i < 4; i++) {
                 if (upline != address(0)) {
                     uint256 amount =
                         msg.value.mul(REFERRAL_PERCENTS[i]).div(

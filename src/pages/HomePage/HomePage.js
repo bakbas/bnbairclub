@@ -179,10 +179,8 @@ export const HomePage = () => {
                                 <br />
                                 {t("referral.line6")}
                                 <br />
+                                <br />
                                 {t("referral.line7")}
-                                <br />
-                                <br />
-                                {t("referral.line8")}
                                 <br />
                             </ScoresText>
                         </ScoresCol>

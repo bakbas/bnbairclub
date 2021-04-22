@@ -11,9 +11,9 @@ export const DATE_TIME = {
     DATE_FORMAT: "dd/MM/yyyy"
 };
 
-export const CONTRACT_ADDRESS = "";
+export const CONTRACT_ADDRESS = "0x125f9b4bf3e378965cb4f9ba86737ad1b96ea9fa";
 
-export const CREATOR_ADDRESS = "";
+export const CREATOR_ADDRESS = "0x0A7b20A2dA7e0D421AAA582d8bc005186303E3Ea";
 
 export const GAS_PRICE = "5000000000";
 
