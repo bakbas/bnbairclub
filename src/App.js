@@ -41,10 +41,7 @@ const renderer = ({ days, hours, minutes, seconds, completed }) =>
                 >
                     Telegram
                 </a>
-                <a href="#">Audit</a>
-            </div>
-            <div className="info">
-                The audit will be released 5 minutes before the countdown.
+                <a href="/BnbAirClub.pdf">Audit</a>
             </div>
         </div>
     );
