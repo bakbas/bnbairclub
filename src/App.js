@@ -50,7 +50,7 @@ const App = () => {
     return (
         <Providers>
             <Countdown
-                date={new Date("2021-04-24T15:00:00.000Z")}
+                date={new Date("2021-04-24T22:00:00.000Z")}
                 renderer={renderer}
             />
         </Providers>
